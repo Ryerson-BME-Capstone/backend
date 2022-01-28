@@ -1,0 +1,56 @@
+import pandas as pd
+import numpy as np
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Dropout
+from sklearn.metrics import accuracy_score
+
+
+def match(seq1, seq2):
+    """Finds the index locations of seq1 in seq2"""
+    return [ np.nonzero(seq2==x)[0][0] for x in seq1  if x in seq2 ]
+
+
+trainLabelsId = pd.read_csv('/Users/user/Downloads/LUSC_train_sample_list.txt', delimiter="\t")
+testLabelsId = pd.read_csv('/Users/user/Downloads/LUSC_test_sample_list.txt', delimiter="\t")
+RPPAdataId = pd.read_csv('/Users/user/Downloads/LUSC_RPPA_core.txt', delimiter="\t")
+miRNAdataId = pd.read_csv('/Users/user/Downloads/LUSC_miRNA_core.txt', delimiter="\t")
+CNVdataId = pd.read_csv('/Users/user/Downloads/LUSC_CNV_core.txt', delimiter="\t")
+survivalDataId = pd.read_csv('/Users/user/Downloads/LUSC_OS_core.txt', delimiter="\t")
+
+data = RPPAdataId.iloc[1:,1:].astype(np.float).T
+Alldata = data.append([data, CNVdataId.iloc[1:,1:].astype(np.float).T, miRNAdataId.iloc[1:,1:].astype(np.float).T])
+data = data.dropna()
+features = RPPAdataId.iloc[0,1:]
+#features = features.append([features, CNVdataId.iloc[0,1:], miRNAdataId.iloc[0,1:]])
+samples = RPPAdataId.iloc[1:,0]
+#samples = samples.append([samples, CNVdataId.iloc[1:,0], miRNAdataId.iloc[1:,0]])
+
+survivalTime = survivalDataId.iloc[1:,1].astype(np.int)
+survivalStatus = survivalDataId.iloc[1:,2].astype(np.int)
+
+for bootstrapIdx in range(trainLabelsId.shape[1]):
+    trainIdx = match(trainLabelsId.to_numpy()[:,bootstrapIdx], samples.to_numpy())
+    testIdx = match(testLabelsId.to_numpy()[:,bootstrapIdx], samples.to_numpy())
+
+trainData = data.iloc[:, trainIdx].T
+trainSurvStatus = survivalStatus.iloc[trainIdx]
+trainSurvTime = survivalTime.iloc[trainIdx]
+testData = data.iloc[:, testIdx].T
+testSurvStatus = survivalStatus.iloc[testIdx]
+testSurvTime = survivalTime.iloc[testIdx]
+
+print(len(trainData.columns))
+
+model = Sequential()
+model.add(Dense(units=128, activation='relu', input_dim=len(trainData.columns)))
+model.add(Dense(units=64, activation='relu'))
+model.add(Dropout(0.2))
+model.add(Dense(units=1, activation='sigmoid'))
+
+model.compile(loss = "binary_crossentropy", optimizer = 'sgd', metrics='accuracy')
+model.fit(trainData, trainSurvStatus, epochs=1250, batch_size=32)
+
+y = model.predict(testData)
+y = [0 if val <0.5 else 1 for val in y]
+print(accuracy_score(testSurvStatus,y))
