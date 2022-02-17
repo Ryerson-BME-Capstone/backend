@@ -14,9 +14,9 @@ def result(dataframe: df):
     data = dataframe.dropna()
     y = model.predict(data)
     y = [0 if val < 0.5 else 1 for val in y]
-    for y = 1:
+    if y == 1:
         prediction="You will survive."
-    for y = 0:
+    if y == 0:
         prediction="You will not survive."
     return prediction
 
