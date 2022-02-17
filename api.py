@@ -4,11 +4,8 @@ import numpy as np
 from tensorflow.keras.models import Sequential, load_model
 
 app = FastAPI()
-model = load_model('prediction')
 
-def match(seq1, seq2):
-    """Finds the index locations of seq1 in seq2"""
-    return [ np.nonzero(seq2==x)[0][0] for x in seq1  if x in seq2 ]
+model = load_model('prediction')
 
 
 @app.post('/prediction' )
