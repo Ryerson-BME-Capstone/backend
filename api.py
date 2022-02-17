@@ -9,7 +9,7 @@ model = load_model('prediction')
 
 
 @app.post('/prediction' )
-def get_potability(dataframe: df):
+def result(dataframe: df):
     data = dataframe.iloc[1:, 1:].astype(np.float).T
     data = dataframe.dropna()
     y = model.predict(data)
