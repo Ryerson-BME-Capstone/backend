@@ -2,7 +2,7 @@ Version: "3.9"
 
 services:
   frontend:
-    build: Streamlit_Frontend
+    build: Frontend-main
     ports:
       - 8501:8501
     networks: 
@@ -12,11 +12,11 @@ services:
     depends_on:
       - backend
     volumes:
-        - ./Streamlit_Frontend:/app
+        - ./Frontend-main:/app
         - ./storage:/storage
 
   backend:
-    build: FastAPI_Backend
+    build: backend-main
     ports:
       - 8000:8000
     networks: 
@@ -24,5 +24,5 @@ services:
         aliases: 
           - backend.docker
     volumes:
-      - ./FastAPI_Backend:/app
+      - ./backend-main:/app
       - ./storage:/storage
