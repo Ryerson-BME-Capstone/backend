@@ -131,7 +131,7 @@ class Clientdata(BaseModel):
     RPPA_BAK1 : float
     RPPA_IRS1 : float
     RPPA_PTK2 : float
-    RPPA_ERBB3 : float
+    RPPA_ERBB3_2 : float
     RPPA_FOXO3_a : float
     RPPA_RB1_Rb : float
     RPPA_MAPK14_p38 : float
