@@ -195,7 +195,7 @@ async def create_item(clientdata: Clientdata):
     y = model.predict(data.iloc[1:,1:])
     y = [0 if val < 0.5 else 1 for val in y]
     if y == 1:
-        survival = "You will survive."
+        survival = 'You will survive.'
     if y == 0:
-        survival = "You will not survive."
+        survival = 'You will wont survive.'
     return {'Prediction': survival}
