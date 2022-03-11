@@ -191,7 +191,8 @@ class Clientdata(BaseModel):
 
 @app.post("/prediction/")
 async def create_item(clientdata: Clientdata):
-    data = pd.DataFrame(clientdata.dict())
+    user = json.loads(clientdata)
+    data = pd.DataFrame(user)
     y = model.predict(data.iloc[1:,1:])
     y = [0 if val < 0.5 else 1 for val in y]
     if y == 1:
