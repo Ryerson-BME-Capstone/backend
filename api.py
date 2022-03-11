@@ -193,7 +193,7 @@ class Clientdata(BaseModel):
 async def create_item(clientdata: Clientdata):
     user = json.loads(clientdata)
     data = pd.DataFrame(user)
-    y = model.predict(data.iloc[1:,1:])
+    y = model.predict(data)
     y = [0 if val < 0.5 else 1 for val in y]
     if y == 1:
         survival = 'You will survive.'
