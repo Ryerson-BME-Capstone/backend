@@ -12,7 +12,6 @@ model = load_model('prediction')
 
 
 class Clientdata(BaseModel):
-    Index : float
     RPPA_HSPA1A : float
     RPPA_XIAP : float
     RPPA_CASP7 : float
