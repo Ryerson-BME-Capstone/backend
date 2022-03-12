@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-from fastapi.encoders import jsonable_encoder
 import pandas as pd
 import numpy as np
 from pydantic import BaseModel
@@ -191,11 +190,13 @@ class Userdata(BaseModel):
 
 @app.post("/prediction/")
 async def create_item(userdata: Userdata):
-    df = pd.DataFrame(jsonable_encoder(userdata))
-    y = model.predict(df)
-    y = [0 if val < 0.5 else 1 for val in y]
-    if y == 1:
-        survival = 'You will survive.'
-    if y == 0:
-        survival = 'You will wont survive.'
-    return {'Prediction': survival}
+    return userdata
+    #userdict = json.loads(userdata)
+    #df = pd.DataFrame(userdict)
+    #y = model.predict(df)
+    #y = [0 if val < 0.5 else 1 for val in y]
+    #if y == 1:
+    #    survival = 'You will survive.'
+    #if y == 0:
+    #    survival = 'You will wont survive.'
+    #return {'Prediction': survival}
