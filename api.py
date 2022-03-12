@@ -12,6 +12,7 @@ model = load_model('prediction')
 
 
 class Userdata(BaseModel):
+    orm_mode=True
     RPPA_HSPA1A : float
     RPPA_XIAP : float
     RPPA_CASP7 : float
