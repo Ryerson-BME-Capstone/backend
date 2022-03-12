@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.encoders import jsonable_encoder
 import pandas as pd
 import numpy as np
 from pydantic import BaseModel
@@ -11,7 +12,7 @@ app = FastAPI()
 model = load_model('prediction')
 
 
-class Clientdata(BaseModel):
+class Userdata(BaseModel):
     RPPA_HSPA1A : float
     RPPA_XIAP : float
     RPPA_CASP7 : float
@@ -189,8 +190,8 @@ class Clientdata(BaseModel):
 
 
 @app.post("/prediction/")
-def receive_df(df_in: str):
-    df = pd.DataFrame.read_json(df_in)
+async def create_item(userdata: Userdata):
+    df = pd.DataFrame(jsonable_encoder(userdata)
     y = model.predict(df)
     y = [0 if val < 0.5 else 1 for val in y]
     if y == 1:
