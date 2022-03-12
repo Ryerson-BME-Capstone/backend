@@ -189,10 +189,9 @@ class Clientdata(BaseModel):
 
 
 @app.post("/prediction/")
-async def create_item(clientdata: Clientdata):
-    user = json.loads(clientdata)
-    data = pd.DataFrame(user)
-    y = model.predict(data)
+def receive_df(df_in: str):
+    df = pd.DataFrame.read_json(df_in)
+    y = model.predict(df)
     y = [0 if val < 0.5 else 1 for val in y]
     if y == 1:
         survival = 'You will survive.'
