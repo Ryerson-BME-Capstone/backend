@@ -200,5 +200,5 @@ async def create_item(userdata: Userdata):
     if y == 1:
         survival = 'You will survive.'
     if y == 0:
-        survival = 'You will wont survive.'
+        survival = 'You will not survive.'
     return {'Prediction': survival}
