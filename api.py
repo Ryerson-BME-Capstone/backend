@@ -42,7 +42,7 @@ class Userdata(BaseModel):
     RPPA_EIF4EBP1 : float
     RPPA_CTNNB1 : float
     RPPA_XBP1 : float
-    RPPA_EIF4EBP1 : float
+    RPPA_EIF4EBP1_4E : float
     RPPA_PCNA : float
     RPPA_SRC : float
     RPPA_TP53BP1 : float
