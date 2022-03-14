@@ -194,7 +194,6 @@ class Userdata(BaseModel):
 
 @app.post("/prediction/")
 async def create_item(userdata: Userdata):
-    return userdata
     data = userdata.dict()
     df = pd.DataFrame(data)
     y = model.predict(df)
