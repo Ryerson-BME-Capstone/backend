@@ -72,7 +72,7 @@ class Userdata(BaseModel):
     RPPA_CCND1 : float
     RPPA_RAB11A : float
     RPPA_SRC_Src_pY416 :float
-    RPPA_BCL2L11 : float
+    RPPA_BCL2L111 : float
     RPPA_ATM : float
     RPPA_NOTCH1 : float
     RPPA_C12ORF5 : float
