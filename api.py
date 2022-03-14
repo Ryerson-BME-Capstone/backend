@@ -196,11 +196,11 @@ class Userdata(BaseModel):
 async def create_item(userdata: Userdata):
     return userdata
     data = userdata.dict()
-    df = pd.DataFrame(data, index=[0])
+    df = pd.DataFrame(data)
     y = model.predict(df)
     y = [0 if val < 0.5 else 1 for val in y]
     if y == 1:
         survival = 'You will survive.'
     if y == 0:
         survival = 'You will not survive.'
-    return y
+    return {'Prediction': survival}
