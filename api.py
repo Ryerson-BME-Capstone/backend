@@ -66,7 +66,7 @@ class Userdata(BaseModel):
     RPPA_RPS6 : float
     RPPA_EGFR : float
     RPPA_PIK3CA : float
-    RPPA_BCL2L1 : float
+    RPPA_BCL2L11 : float
     RPPA_GSK3A : float
     RPPA_DVL3 : float
     RPPA_CCND1 : float
