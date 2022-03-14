@@ -122,7 +122,7 @@ class Userdata(BaseModel):
     RPPA_MYC : float
     RPPA_PRKAA1_AMPK : float
     RPPA_ERRFI1_MIG : float
-    RPPA_EIF4EBP1 : float
+    RPPA_EIF4EBP1_2 : float
     RPPA_STAT3 : float
     RPPA_AKT1_AKT2_AKT3 : float
     RPPA_NF2 : float
@@ -171,7 +171,7 @@ class Userdata(BaseModel):
     RPPA_ARID1A : float
     RPPA_YBX1_yb : float
     RPPA_NOTCH3 : float
-    RPPA_EIF4EBP1 : float
+    RPPA_EIF4EBP1_3 : float
     RPPA_XRCC1 : float
     RPPA_ANXA1 : float
     RPPA_CD49 : float
