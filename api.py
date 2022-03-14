@@ -186,6 +186,10 @@ class Userdata(BaseModel):
     RPPA_RB1 : float
     RPPA_MAPK1 : float
     RPPA_TFF1 : float
+        
+    class config:
+        orm_mode = True
+            
 
 
 @app.post("/prediction/")
