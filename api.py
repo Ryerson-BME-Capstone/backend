@@ -199,6 +199,7 @@ async def create_item(userdata: Userdata):
     y = model.predict(df)
     y = [0 if val < 0.5 else 1 for val in y]
     if y == 1:
-        return {'Prediction':'You will survive'}
+        return survival = 'You will survive'
     if y == 0:
-        return {'Prediction':'You will survive'}
+        return survival = 'You will not survive'
+    return {'Prediction': survival}
