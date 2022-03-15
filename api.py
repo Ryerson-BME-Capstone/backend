@@ -198,8 +198,4 @@ async def create_item(userdata: Userdata):
     df['RPPA_Y2K'], df['RPPA_YZY'] = [1.065743, 0.693467]
     y = model.predict(df)
     y = [0 if val < 0.5 else 1 for val in y]
-    if y == 1:
-        return survival = 'You will survive'
-    if y == 0:
-        return survival = 'You will not survive'
-    return {'Prediction': survival}
+    return y
