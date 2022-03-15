@@ -195,7 +195,7 @@ class Userdata(BaseModel):
 @app.post("/prediction/")
 async def create_item(userdata: Userdata):
     data = userdata.json()
-    df = pd.DataFrame.from_records(data)
+    df = pd.DataFrame(eval(data), index=[0])
     return df
     y = model.predict(df)
     y = [0 if val < 0.5 else 1 for val in y]
